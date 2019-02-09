@@ -43,5 +43,39 @@
 
 여기는 작성중입니다..
 
+
+
+## NGINX 세팅하기
+```
+server {
+    listen       80;
+    server_name  localhost;
+ 
+    root   /usr/share/nginx/html;
+    location / {
+        index.php index  index.html index.htm;
+        try_files $uri $uri/ =404;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404; 
+        fastcgi_pass   unix:/run/php/php7.2-fpm.sock;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+ 
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+```
+
+
  
 
