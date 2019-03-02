@@ -59,6 +59,8 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
   - `wget https://wordpress.org/latest.tar.gz/`
   - 그리고 패키지를 다음 명령으로 압푹을 푸세요.
 
+### Step 2. 
+
 ___
 
 작성중입니다!!
