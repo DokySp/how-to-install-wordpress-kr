@@ -1,6 +1,6 @@
 # WordPress 설치하기
 
-- 출처: [WordPress.org](https://codex.wordpress.org/Installing_WordPress)
+- 출처: [WordPress.ORG](https://codex.wordpress.org/Installing_WordPress)
 - 한글작성자: 김도균
 - 작성일: 2019월 2월 8일
 
@@ -104,7 +104,6 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 만약 Wordpress를 내 웹서버에 설치하는 경우, 다음 설명서 중 하나를 따라서 진행하십시오.
 
 - phpMyAdmin이 설치되어 있는 경우, [phpMyAdmin 엑세스하기](https://codex.wordpress.org/WordPress_Backups#Accessing_phpMyAdmin)를 참고하세요. (원문)
-
 - MySQL Client가 설치되어 있는 경우, [아래](#Using the MySQL Client) 설치법을 참고하면 됩니다. (번역해둠!)
 
 
@@ -164,6 +163,133 @@ mysql> EXIT
 
 
 - `root` 계정을 Wordpress DB 관리 계정으로 사용할 수도 있습니다만..  시스템 root 유저로 mysql 권한을 갖지 않도록 root 계정이 아닌 계정을 mysql admin 계정으로 사용하는 것이 안전합니다. (작업할 때, 루트로 작업하는 것을 최소화한다면 DB를 털릴 가능성을 줄일 수 있습니다.)
+- `wordpress` 혹은 `blog`를 DATABASE 이름으로 설정하시길 권장합니다.
+- *워드프레스 유저 이름*으로 `wordpress`를 설정하길 권장합니다...**만**, 이걸 보고 아마 전세계 대부분 사람들이 이름을 `wordpress`로 설정할 수 있다는 점을 유념하시길 바랍니다.
+  - `hostname`은 거의 `localhost`일겁니다. 만약 호스트 이름이`localhost`가 아닌데 값을 모를 경우에는, 당신의 시스템 관리자와 함께 확인하십시오 당신이 당신 wordpress의 관지라가 아닌지를. 반대로 당신이 관리자라면, MySQL 접속 계정이 `root`가 아닌 일반 계정을 사용하고 있는지 확인해야 합니다.
+- *비밀번호*는 반드시 복잡하고 유추하기 어려워야 합니다. (영어 대문자, 소문자, 숫자, 기호를 섞어 쓰기를 권장합니다.) 일반적인 단어를 안쓰도록 하기 위해 문장의 초성만 따서 비번을 설정하는 방법을 쓰면 좋습니다. ~~(초성놀이)~~
+
+ㅁㄴㅇㄹ
+
+
+
+#### Using DirectAdmin
+
+a. 귀찮앙
+
+
+
+### Step 3: wp-config.php 설정하기
+
+`wp-config.php`파일을 직접 생성하여 만들거나, 이번 단계를 건너 뛰고 [Step 5]()에서 WordPress 설치 스크립트가 스스로 설정하도록 하는 두 방법이 있습니다. (대신 어느 방법이나 Step 2에서 설정한 DB 관련 정보들을 알고 있어야 합니다.)
+
+
+
+(설정파일과 비밀번호 보안을 위한 비밀키 생성에 대해 더 자세하고 구체적인 설명은 다음 링크를 참고하시면 됩니다. [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php))
+
+
+
+Return to where you extracted the WordPress package in Step 1, rename the file `wp-config-sample.php` to `wp-config.php`, and open it in a text editor.
+
+[Enter your database information](https://codex.wordpress.org/Editing_wp-config.php#Configure_Database_Settings) under the section labeled
+
+```
+ // ** MySQL settings - You can get this info from your web host ** //
+```
+
+- DB_NAME 
+
+  The name of the database you created for WordPress in Step 2.
+
+- DB_USER 
+
+  The username you created for WordPress in Step 2.
+
+- DB_PASSWORD 
+
+  The password you chose for the WordPress username in Step 2.
+
+- DB_HOST 
+
+  The hostname you determined in Step 2 (usually `localhost`, but not always; see [some possible DB_HOST values](https://codex.wordpress.org/Editing_wp-config.php#Possible_DB_HOST_values)). If a port, socket, or pipe is necessary, append a colon (`:`) and then the relevant information to the hostname.
+
+- DB_CHARSET 
+
+  The database character set, normally should not be changed (see [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php)).
+
+- DB_COLLATE 
+
+  The database collation should normally be left blank (see [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php)).
+
+[Enter your secret key values](https://codex.wordpress.org/Editing_wp-config.php#Security_Keys) under the section labeled
+
+```
+  * Authentication Unique Keys.
+```
+
+Save the `wp-config.php` file.
+
+
+
+### Step 4: Upload the files
+
+Now you will need to decide where on your domain you'd like your WordPress-powered site to appear:
+
+- In the root directory of your website. (For example, `http://example.com/`)
+- In a subdirectory of your website. (For example, `http://example.com/blog/`)
+
+***Note:** The location of your root web directory in the filesystem on your web server will vary across hosting providers and operating systems. Check with your hosting provider or system administrator if you do not know where this is.*
+
+#### In the Root Directory
+
+- If you need to upload your files to your web server, use an [FTP](https://codex.wordpress.org/Glossary#FTP) client to upload all the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
+- If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move all of the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
+
+#### In a Subdirectory
+
+- If you need to upload your files to your web server, rename the `wordpress` directory to your desired name, then use an [FTP](https://codex.wordpress.org/Glossary#FTP)client to upload the directory to your desired location within the root directory of your website.
+- If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move the `wordpress` directory to your desired location within the root directory of your website, and rename the directory to your desired name.
+
+***Note:** If your FTP client has an option to convert file names to lower case, make sure it's disabled.*
+
+
+
+### Step 5: Run the Install Script
+
+Point a web browser to start the installation script.
+
+- If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
+- If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
+
+
+
+#### Setup configuration file
+
+If WordPress can't find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php` file. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the `wp-config.php` file yourself (step 3)](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php).
+
+[![install-step3.png](https://codex.wordpress.org/images/thumb/5/5a/install-step3.png/600px-install-step3.png)](https://codex.wordpress.org/File:install-step3.png)
+
+
+
+#### Finishing installation
+
+The following screenshots show how the installation progresses. Notice that in entering the details screen, you enter your site title, your desired user name, your choice of a password (twice), and your e-mail address. Also displayed is a check-box asking if you would like your blog to appear in search engines like Google and Technorati. Leave the box unchecked if you would like your blog to be visible to everyone, including search engines, and check the box if you want to block search engines, but allow normal visitors. Note all this information can be changed later in your [Administration Screens](https://codex.wordpress.org/Administration_Screens).
+
+[![install-step5.png](https://codex.wordpress.org/images/thumb/1/1b/install-step5.png/600px-install-step5.png)](https://codex.wordpress.org/File:install-step5.png)
+
+**Note: You should not use "admin" as a user id as shown above!**
+
+If you successfully install the WordPress, login prompt will be displayed.
+
+
+
+#### Install script troubleshooting
+
+- If you get an error about the database when you run the install script:
+  - Go back to [Step 2](https://codex.wordpress.org/Installing_WordPress#Step_2:_Create_the_Database_and_a_User) and [Step 3](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php), and make sure you entered all the correct database information into `wp-config.php`.
+  - Make sure you granted your WordPress user permission to access your WordPress database in **Step 3**.
+  - Make sure the database server is running.
+
+
 
 
 
@@ -206,4 +332,3 @@ server {
     }
 }
 ```
-
