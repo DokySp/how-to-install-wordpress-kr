@@ -11,7 +11,7 @@
 - [WordPress 설치 전 필요한 것들](#things-to-know-before-installing-wordpress)
 - [가장 많이 쓰이는 5분 설치법](#famous-5-minute-installation)
 - [상세한 설치법](#detailed-instructions)
-- [NGINX 세팅하기](#configure-nginx)
+- [NGINX 세팅하기](https://github.com/DokyoonKim/how-to-install-wordpress-kr/blob/master/appendix/setting-nginx.md)
 
 
 
