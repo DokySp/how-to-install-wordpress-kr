@@ -118,7 +118,7 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 #### Using the MySQL Client
 
-쉘을 통해 MySQL 또는 MariaDB에서 `users`와 `databases`를 생성할 수 있습니다. 아래 쉘스크립트를 쉘에 사용~~(복붙)~~하면 빠르게 생성됩니당.
+쉘을 통해 MySQL 또는 MariaDB에서 `users`와 `databases`를 생성할 수 있습니다. 아래 쉘스크립트를 쉘에 ~~(복붙)~~사용하면 빠르게 생성됩니당.
 
 ```shell
 # <- 이 샾이 앞에 있으면 주석이란 뜻입니다.
@@ -129,7 +129,7 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 # DBMS(MySQL) 접속
 $ mysql -u 철수 -p 
-# asdf는 예시 관리자계정이름입니다. (MySQL 계정 설정법은 아래에 있습니다!)
+# '철수'는 예시 관리자계정이름(username)입니다. (MySQL 계정 설정법은 아래에 있습니다!)
 # 이 다음에 Enter password: 가 나오면 해당 계정 비밀번호를 입력합니다.
 
 
@@ -164,7 +164,7 @@ mysql> EXIT
 
 - `root` 계정을 Wordpress DB 관리 계정으로 사용할 수도 있습니다만..  시스템 root 유저로 mysql 권한을 갖지 않도록 root 계정이 아닌 계정을 mysql admin 계정으로 사용하는 것이 안전합니다. (작업할 때, 루트로 작업하는 것을 최소화한다면 DB를 털릴 가능성을 줄일 수 있습니다.)
 - `wordpress` 혹은 `blog`를 DATABASE 이름으로 설정하시길 권장합니다.
-- *워드프레스 유저 이름*으로 `wordpress`를 설정하길 권장합니다...**만**, 이걸 보고 아마 전세계 대부분 사람들이 이름을 `wordpress`로 설정할 수 있다는 점을 유념하시길 바랍니다.
+- *워드프레스 `username`*으로 `wordpress`를 설정하길 권장합니다...**만**, 이걸 보고 아마 전세계 대부분 사람들이 이름을 `wordpress`로 설정할 수 있다는 점을 유념하시길 바랍니다.
   - `hostname`은 거의 `localhost`일겁니다. 만약 호스트 이름이`localhost`가 아닌데 값을 모를 경우에는, 당신의 시스템 관리자와 함께 확인하십시오 당신이 당신 wordpress의 관지라가 아닌지를. 반대로 당신이 관리자라면, MySQL 접속 계정이 `root`가 아닌 일반 계정을 사용하고 있는지 확인해야 합니다.
 - *비밀번호*는 반드시 복잡하고 유추하기 어려워야 합니다. (영어 대문자, 소문자, 숫자, 기호를 섞어 쓰기를 권장합니다.) 일반적인 단어를 안쓰도록 하기 위해 문장의 초성만 따서 비번을 설정하는 방법을 쓰면 좋습니다. ~~(초성놀이)~~
 
@@ -188,63 +188,87 @@ a. 귀찮앙
 
 
 
-Return to where you extracted the WordPress package in Step 1, rename the file `wp-config-sample.php` to `wp-config.php`, and open it in a text editor.
+Step 1에서 다운로드하고 압축을 푼 Wordpress 폴더 안에,  `wp-config-sample.php` 파일을 `wp-config.php` 로 이름을 바꾸시기 바랍니다. 그리고 파일을 연 후, 아래 [데이터베이스 정보들을 수정](https://codex.wordpress.org/Editing_wp-config.php#Configure_Database_Settings)합니다.
 
-[Enter your database information](https://codex.wordpress.org/Editing_wp-config.php#Configure_Database_Settings) under the section labeled
+```shell
+$ mv wp-config-sample.php wp-config.php
+$ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니다.
+```
+
+
 
 ```
- // ** MySQL settings - You can get this info from your web host ** //
+ // ** MySQL settings - 웹호스팅 업체에서 다음 정보들을 확인할 수 있습니다. ** //
 ```
 
 - DB_NAME 
 
-  The name of the database you created for WordPress in Step 2.
+  Step 2에서 만들었던 DB 이름을 작성합니다.
 
 - DB_USER 
 
-  The username you created for WordPress in Step 2.
+  Step 2에서 만들었던 `username`을 작성합니다.
 
 - DB_PASSWORD 
 
-  The password you chose for the WordPress username in Step 2.
+  Step 2에서 만들었던 `username`에 대한 비밀번호를 적습니다.
 
 - DB_HOST 
 
-  The hostname you determined in Step 2 (usually `localhost`, but not always; see [some possible DB_HOST values](https://codex.wordpress.org/Editing_wp-config.php#Possible_DB_HOST_values)). If a port, socket, or pipe is necessary, append a colon (`:`) and then the relevant information to the hostname.
+  Step 2에서 만들었던 `'username'@'localhost'`에서 @ 뒷 부분을 적습니다 (대부분은 `localhost`겠지만 아닐 수도 있습니다. [이것](https://codex.wordpress.org/Editing_wp-config.php#Possible_DB_HOST_values)들 중 하나일 수 있으니 참고 바랍니다). 포트, 소켓, 파이프가 필요한 경우, 콜론(`:`)을 붙인 후 관련 정보들을 기입하세요.
 
 - DB_CHARSET 
 
-  The database character set, normally should not be changed (see [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php)).
+  DB의 charset을 입력합니다. (한국어 포함) 굳이 바꾸실 필요는 없습니다([Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php) 참조).
 
 - DB_COLLATE 
 
-  The database collation should normally be left blank (see [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php)).
+  DB collation(정렬)은 일반적으로 빈칸으로 둡니다([Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php) 참조).
 
-[Enter your secret key values](https://codex.wordpress.org/Editing_wp-config.php#Security_Keys) under the section labeled
+섹션 라벨 밑 부분에 [secret key 값들을 입력](https://codex.wordpress.org/Editing_wp-config.php#Security_Keys)합니다. (이건 필수는 아닌듯 합니다..)
 
 ```
   * Authentication Unique Keys.
 ```
 
-Save the `wp-config.php` file.
+모든 수정이 끝나면 `wp-config.php` 파일을 저장합니다.
+
+```shell
+# vim의 경우,
+:wq
+```
 
 
 
-### Step 4: Upload the files
 
-Now you will need to decide where on your domain you'd like your WordPress-powered site to appear:
 
-- In the root directory of your website. (For example, `http://example.com/`)
-- In a subdirectory of your website. (For example, `http://example.com/blog/`)
+### Step 4: 파일 업로드하기
 
-***Note:** The location of your root web directory in the filesystem on your web server will vary across hosting providers and operating systems. Check with your hosting provider or system administrator if you do not know where this is.*
+이제 Wordpress를 홈페이지 도메인에서 어디에 설치할지를 결정해야 합니다.
 
-#### In the Root Directory
+- **루트(최상위) 디렉토리**에 설치하는 경우. (ex> `https://www.myblog.com/`)
+
+- **서브 디렉토리**에 설치하는 경우. (ex> `https://www.myblog.com/blog/`)
+
+***참고:** 서버 컴퓨터에서 홈페이지 루트 디렉토리가 있는 위치는 서버 시스템 혹은 서비스 제공자에 따라 다릅니다. 이 위치를 모를 경우 호스팅 업체 혹은 시스템 관리자에게 확인을 해야 합니다.*
+
+```shell
+# ubuntu + nginx의 경우(둘 중 하나),
+/usr/share/nginx/http
+/var/www/html
+
+# ubuntu + apache의 경우, 
+/var/www/html
+```
+
+
+
+#### 루트(최상위) 디렉토리에 설치하는 경우
 
 - If you need to upload your files to your web server, use an [FTP](https://codex.wordpress.org/Glossary#FTP) client to upload all the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
 - If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move all of the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
 
-#### In a Subdirectory
+#### 서브 디렉토리에 설치하는 경우
 
 - If you need to upload your files to your web server, rename the `wordpress` directory to your desired name, then use an [FTP](https://codex.wordpress.org/Glossary#FTP)client to upload the directory to your desired location within the root directory of your website.
 - If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move the `wordpress` directory to your desired location within the root directory of your website, and rename the directory to your desired name.
@@ -253,7 +277,7 @@ Now you will need to decide where on your domain you'd like your WordPress-power
 
 
 
-### Step 5: Run the Install Script
+### Step 5: 설치 스크립트 실행
 
 Point a web browser to start the installation script.
 
@@ -262,7 +286,7 @@ Point a web browser to start the installation script.
 
 
 
-#### Setup configuration file
+#### 설정파일 설치
 
 If WordPress can't find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php` file. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the `wp-config.php` file yourself (step 3)](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php).
 
@@ -270,7 +294,7 @@ If WordPress can't find the `wp-config.php` file, it will tell you and offer to 
 
 
 
-#### Finishing installation
+#### 설치 마무리
 
 The following screenshots show how the installation progresses. Notice that in entering the details screen, you enter your site title, your desired user name, your choice of a password (twice), and your e-mail address. Also displayed is a check-box asking if you would like your blog to appear in search engines like Google and Technorati. Leave the box unchecked if you would like your blog to be visible to everyone, including search engines, and check the box if you want to block search engines, but allow normal visitors. Note all this information can be changed later in your [Administration Screens](https://codex.wordpress.org/Administration_Screens).
 
@@ -282,16 +306,19 @@ If you successfully install the WordPress, login prompt will be displayed.
 
 
 
-#### Install script troubleshooting
+#### 설치 스크립트 문제해결
 
-- If you get an error about the database when you run the install script:
-  - Go back to [Step 2](https://codex.wordpress.org/Installing_WordPress#Step_2:_Create_the_Database_and_a_User) and [Step 3](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php), and make sure you entered all the correct database information into `wp-config.php`.
-  - Make sure you granted your WordPress user permission to access your WordPress database in **Step 3**.
-  - Make sure the database server is running.
+- 만약 설치 스크립트 동작 중 DB 관련 에러가 난다면:
 
+  - [Step 2](https://codex.wordpress.org/Installing_WordPress#Step_2:_Create_the_Database_and_a_User)와 [Step 3](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php)로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
 
+  - **Step 3**에서 DB user에게 DB권한을 설정했는지 확인합니다.
 
+  - DB 서버가 제대로 작동하고 있는지 확인합니다.
 
+    ```shell
+    $ sudo service mysql restart
+    ```
 
 
 
