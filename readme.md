@@ -111,53 +111,49 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 `wp-config.php`파일을 직접 생성하여 만들거나, 이번 단계를 건너 뛰고 [Step 5](Step-5:-설치-스크립트-실행)에서 WordPress 설치 스크립트가 스스로 설정하도록 하는 두 방법이 있습니다. (대신 어느 방법이나 Step 2에서 설정한 DB 관련 정보들을 알고 있어야 합니다.)
 
+(설정파일과 비밀번호 보안을 위한 비밀키 생성에 대해 더 자세하고 구체적인 설명은 [wp-config.php 수정하기(원문)](https://wordpress.org/support/article/editing-wp-config-php/) 페이지를 참고하시면 됩니다.)
 
-
-(설정파일과 비밀번호 보안을 위한 비밀키 생성에 대해 더 자세하고 구체적인 설명은 다음 링크를 참고하시면 됩니다. [Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php))
-
-
-
-Step 1에서 다운로드하고 압축을 푼 Wordpress 폴더 안에,  `wp-config-sample.php` 파일을 `wp-config.php` 로 이름을 바꾸시기 바랍니다. 그리고 파일을 연 후, 아래 [데이터베이스 정보들을 수정](https://codex.wordpress.org/Editing_wp-config.php#Configure_Database_Settings)합니다.
+Step 1에서 다운로드하고 압축을 푼 Wordpress 폴더 안에,  `wp-config-sample.php` 파일을 `wp-config.php` 로 이름을 바꾸시기 바랍니다.
 
 ```shell
 $ mv wp-config-sample.php wp-config.php
-$ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니다.
 ```
 
+이름을 바꾸고 파일을 열어 아래의 [데이터베이스 정보들을 수정(원문)](https://wordpress.org/support/article/editing-wp-config-php/#configure-database-settings)합니다.
 
+```shell
+$ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니다.
+```
 
 ```
  // ** MySQL settings - 웹호스팅 업체에서 다음 정보들을 확인할 수 있습니다. ** //
 ```
 
 - DB_NAME 
-
-  Step 2에서 만들었던 DB 이름을 작성합니다.
+  Step 2에서 만들었던 데이터베이스 이름을 작성합니다.
 
 - DB_USER 
-
-  Step 2에서 만들었던 `username`을 작성합니다.
+  Step 2에서 만들었던 username을 작성합니다.
 
 - DB_PASSWORD 
-
-  Step 2에서 만들었던 `username`에 대한 비밀번호를 적습니다.
+  Step 2에서 만들었던 username에 대한 비밀번호를 적습니다.
 
 - DB_HOST 
-
-  Step 2에서 만들었던 `'username'@'localhost'`에서 @ 뒷 부분을 적습니다 (대부분은 `localhost`겠지만 아닐 수도 있습니다. [이것](https://codex.wordpress.org/Editing_wp-config.php#Possible_DB_HOST_values)들 중 하나일 수 있으니 참고 바랍니다). 포트, 소켓, 파이프가 필요한 경우, 콜론(`:`)을 붙인 후 관련 정보들을 기입하세요.
+  Step 2에서 만들었던 `'username'@'localhost'`에서 @ 뒷 부분을 적습니다 (대부분은 `localhost`겠지만 아닐 수도 있습니다. [예상 가능한 DB_HOST 값(원문)](https://wordpress.org/support/article/editing-wp-config-php/#set-database-host)들 중 하나일 수 있으니 참고 바랍니다). 포트, 소켓, 파이프가 필요한 경우, hostname(ex> `localhost` 등) 뒤에 콜론(`:`)을 붙인 후 관련 정보들을 기입하세요.
 
 - DB_CHARSET 
-
-  DB의 charset을 입력합니다. (한국어 포함) 굳이 바꾸실 필요는 없습니다([Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php) 참조).
+  DB의 charset을 입력합니다. (한국어 포함) 굳이 바꾸실 필요는 없습니다([wp-config.php 수정하기(원문)](https://wordpress.org/support/article/editing-wp-config-php/) 참조).
 
 - DB_COLLATE 
+  DB collation(정렬)은 일반적으로 빈칸으로 둡니다([wp-config.php 수정하기(원문)](https://wordpress.org/support/article/editing-wp-config-php/) 참조).
 
-  DB collation(정렬)은 일반적으로 빈칸으로 둡니다([Editing wp-config.php](https://codex.wordpress.org/Editing_wp-config.php) 참조).
+섹션 라벨 밑 부분에 [secret key 값들을 입력](https://wordpress.org/support/article/editing-wp-config-php/)합니다.
 
-섹션 라벨 밑 부분에 [secret key 값들을 입력](https://codex.wordpress.org/Editing_wp-config.php#Security_Keys)합니다. (이건 필수는 아닌듯 합니다..)
+> **_각주:_**
+> secret key 값들을 입력하는 과정이 필수는 아닌듯 합니다..
 
 ```
-  * Authentication Unique Keys.
+  * Authentication Unique Keys and Salts.
 ```
 
 모든 수정이 끝나면 `wp-config.php` 파일을 저장합니다.
@@ -169,16 +165,14 @@ $ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니�
 
 
 
-
-
 ### Step 4: 파일 업로드하기
 
-이제 Wordpress를 홈페이지 도메인에서 어디에 설치할지를 결정해야 합니다.
+이제 워드프레스를 홈페이지 도메인에서 어디에 설치할지를 결정해야 합니다.
 
 - **루트(최상위) 디렉토리**에 설치하는 경우. (ex> `https://www.myblog.com/`)
 - **서브 디렉토리**에 설치하는 경우. (ex> `https://www.myblog.com/blog/`)
 
-***참고:** 서버 컴퓨터에서 홈페이지 루트 디렉토리가 있는 위치는 서버 시스템 혹은 서비스 제공자에 따라 다릅니다. 이 위치를 모를 경우 호스팅 업체 혹은 시스템 관리자에게 확인을 해야 합니다.*
+***참고:*** *[서버 컴퓨터](https://wordpress.org/support/article/glossary/#web-server)에서 홈페이지 루트 디렉토리가 있는 위치는 서버 시스템 혹은 서비스 제공자에 따라 다릅니다. 이 위치를 모를 경우 [호스팅 업체](https://wordpress.org/support/article/glossary/#hosting-provider) 혹은 시스템 관리자에게 확인을 해야 합니다.*
 
 ```shell
 # ubuntu + nginx의 경우(둘 중 하나),
@@ -190,18 +184,15 @@ $ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니�
 ```
 
 
-
 #### 루트(최상위) 디렉토리에 설치하는 경우
+ - If you need to upload your files to your web server, use an [FTP](https://wordpress.org/support/article/glossary/#ftp) client to upload all the contents of the `wordpress` directory (but not the directory itself) into the root directory of your website.
+ - If your files are already on your web server, and you are using [shell](https://wordpress.org/support/article/glossary/#shell) access to install WordPress, move all of the contents of the `wordpress` directory (but not the directory itself) into the root directory of your website.
 
-- If you need to upload your files to your web server, use an [FTP](https://codex.wordpress.org/Glossary#FTP) client to upload all the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
-- If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move all of the *contents* of the `wordpress` directory (but not the directory itself) into the root directory of your website.
 
 #### 서브 디렉토리에 설치하는 경우
+If you need to upload your files to your web server, rename the `wordpress` directory to your desired name, then use an [FTP](https://wordpress.org/support/article/glossary/#ftp) client to upload the directory to your desired location within the root directory of your website.
+If your files are already on your web server, and you are using [shell](https://wordpress.org/support/article/glossary/#shell) access to install WordPress, move the `wordpress` directory to your desired location within the root directory of your website, and rename the directory to your desired name.
 
-- If you need to upload your files to your web server, rename the `wordpress` directory to your desired name, then use an [FTP](https://codex.wordpress.org/Glossary#FTP)client to upload the directory to your desired location within the root directory of your website.
-- If your files are already on your web server, and you are using [shell](https://codex.wordpress.org/Glossary#Shell) access to install WordPress, move the `wordpress` directory to your desired location within the root directory of your website, and rename the directory to your desired name.
-
-***Note:** If your FTP client has an option to convert file names to lower case, make sure it's disabled.*
 
 
 
@@ -209,12 +200,13 @@ $ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니�
 
 Point a web browser to start the installation script.
 
- - If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
- - If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
+- If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
+- If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
+
 
 #### Setup configuration file
 
-If WordPress can’t find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php file`. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the `wp-config.php` file yourself (step 3)](Step-3:-wp-config.php-설정하기).
+If WordPress can’t find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php` file. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the wp-config.php file yourself (step 3)](Step-3:-wp-config.php-설정하기).
 
 ![---](https://i0.wp.com/wordpress.org/support/files/2018/10/install-step3_v47.png?resize=784%2C563&ssl=1)
 
@@ -224,46 +216,20 @@ The following screenshots show how the installation progresses. Notice that in e
 
 ![---](https://i2.wp.com/wordpress.org/support/files/2018/10/install-step5_v47.png?resize=795%2C835&ssl=1)
 
-**Note: You should not use "admin" as a user id as shown above!**
+<div>**Note: You should not use "admin" as a user id as shown above!**</div>
 
 If you successfully install the WordPress, login prompt will be displayed.
-
 
 
 #### Install script troubleshooting
 
 - 만약 설치 스크립트 동작 중 DB 관련 에러가 난다면:
-
-  - [Step 2](https://codex.wordpress.org/Installing_WordPress#Step_2:_Create_the_Database_and_a_User)와 [Step 3](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php)로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
-
-  - **Step 3**에서 DB user에게 DB권한을 설정했는지 확인합니다.
-
-  - DB 서버가 제대로 작동하고 있는지 확인합니다.
-
+  - [Step 2]()와 [Step 3]()로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
+  - **Step 3**에서 user에게 워드프레스 데이터베이스 접근 권한을 할당했는지 확인합니다.
+  - 데이터베이스 서버가 제대로 작동하고 있는지 확인합니다.
     ```shell
-    $ sudo service mysql restart
+    $ sudo service mysql restart  #mysql 재시동 스크립트
     ```
 
-
- - If you get an error about the database when you run the install script:
-   - Go back to [Step 2]() and [Step 3](), and make sure you entered all the correct database information into `wp-config.php`.
-   - Make sure you granted your WordPress user permission to access your WordPress database in **Step 3**.
-   - Make sure the database server is running.
-
-## Common Installation Problems
-
-The following are some of the most common installation problems. For more information and troubleshooting for problems with your WordPress installation, check out [FAQ Installation](https://wordpress.org/support/article/faq-installation/) and [FAQ Troubleshooting](https://wordpress.org/support/article/faq-troubleshooting/).
-
-**I see a directory listing rather than a web page.**
-
-The web server needs to be told to view `index.php` by default. In Apache, use the `DirectoryIndex index.php` directive. The simplest option is to create a file named `.htaccess` in the installed directory and place the directive there. Another option is to add the directive to the web server’s configuration files.
-
-**I see lots of *Headers already sent* errors. How do I fix this?**
-
-You probably introduced a syntax error in editing `wp-config.php`.
-
-
-
-
-
-
+## 자주 묻는 질문
+[해당 문서](./appendix/common-installation-problems.md) 참고.
