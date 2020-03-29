@@ -1,7 +1,7 @@
 # WordPress 설치하기
 
-- 출처: [WordPress.ORG](https://codex.wordpress.org/Installing_WordPress)
-- 한글작성자: 김도균
+- 출처: [wordpress.org](https://wordpress.org/support/article/how-to-install-wordpress/)
+- 번역: 김도균([@DokySp](https://github.com/dokysp))
 - 작성일: 2019월 2월 8일
 
 
@@ -14,11 +14,16 @@
 - [NGINX 세팅하기](https://github.com/DokyoonKim/how-to-install-wordpress-kr/blob/master/appendix/setting-nginx.md)
 
 
+## 워드프레스 설치하기
+워드프레스는 설치가 쉬운 것으로 잘 알려져 있습니다. 대부분의 상황에서, 워드프레스 블로그 설치는 괭장히 간단하며, 5분 안에 모두 설치를 하실 수 있습니다. [많은 웹 호스팅 업체]가 [워드프레스 자동 설치(Fantastico 등) 도구]를 지원합니다. 그러나, 워드프레스를 직접 설치하실 경우, 이 가이드가 도움이 될것입니다.
 
-## Things to Know Before Installing WordPress
+#### WordPress 설치 전 확인할 사항
 
-#### WordPress 설치 전 필요한 것들
+워드프레스를 설치하기 전에, 몇 가지 진행하셔야 할 것들이 있습니다. [워드프레스 설치 전에](./appendix/before-you-install.md)문서를 참고하세요.
+만약, 여러 개의 워드프레스 인스턴스가 필요한 경우, [여러 개 워드프레스 인스턴스 설치하기(영문)](https://wordpress.org/support/article/installing-multiple-blogs/)문서를 참고하세요.
 
+
+<span>
 1. 서버 환경이 다음 조건을 만족하는지 확인
    - `PHP 7.3` 이상
    - `MySQL 5.6` 혹은 `MariaDB 10.0` 이상
@@ -30,53 +35,42 @@
 
 3. 다운로드파일 압축해제 (`tar.gz` 혹은 `zip`파일)
 4. 비밀키를 위한 안전한 비밀번호 생각하기 (`wp-config.php` 파일 편집 시 필요)
+</span>
 
 
+## 간단 설치법
 
-## Famous 5-Minute Installation
+이미 워드프레스를 설치해본 경험이 있는 분들을 위한 간단 설치 설명서입니다. 자세한 설명은 [상세 설치법](#상세-설치법)을 참고하세요.
 
-#### 가장 많이 쓰이는 5분 설치법
+1. [WordPress 파일 다운로드](https://wordpress.org/download/) 및 압축을 풉니다.
+2. [`MySQL`](https://wordpress.org/support/article/glossary/#mysql) (혹은 `MariaDB`)에 데이터베이스를 생성하세요. 이 때 생성한 데이터베이스에 **모든 사용자에게 읽기 및 쓰기 권한을 주도록 설정하세요.**
+3. *(Optional)* `wp-config-sample.php` 파일을 `wp-config.php`로 바꾸세요. 그리고 나서 파일을 다음 설명에 맞추어 수정하고([wp-config.php 파일 수정하기(영문)](https://wordpress.org/support/article/editing-wp-config-php/) 문서 참고), Step1에서 생성한 데이터베이스 정보 기입.
+참고: **유닉스, 리눅스 기반 OS에서 파일 이름을 바꾸는게 익숙치 않으신 분들은 Step3를 반드시 하지 않으셔도 됩니다.** 설치프로그램이 자동으로 wp-config.php파일을 생성하므로 Step3를 그냥 넘어가셔도 됩니다.
+4. WordPress파일을 서버에 원하는 위치에 옮기도록 합니다.
+   - 만약 루트 도메인에 워드프레스를 연결시킬 경우(ex> `https://www.example.com/`), 모든 파일을 압축 해제 후 안의 내용물을 전부 서버의 루트 디렉토리(ex>Apache의 경우, `/var/www/html`)에 넣을 것.
+   - 만약 서브디렉토리에 넣을 경우(ex> `https://www.example.com/blog`), 서버의 루트 디렉토리에 blog 폴더를 생성하고, 모든 파일을 압축 해제 후 안의 내용물을 전부 blog 폴더에 넣을 것.
+   - 만약 FTP프로그램이 강제로 알파벳을 소문자로 만들 경우, 이 기능을 해제하세요!
+5. ~~런~~ 홈페이지에 접속하여 설치를 계속 진행하세요. 
+   - 워드프레스를 서버의 루트 디렉토리에 설치한 경우, `https://example.com`로 접속!
+   - 워드프레스를 서버의 서브 디렉토리(ex> `blog`)에 설치한 경우, `https://example.com/blog`로 접속!
 
-간단한 설명으로도 설치가 가능한 분들을 위한 퀵 버전 설명서입니다. 자세한 설명은 [상세한 설치법](#detailed-instructions)을 참고하세요.
-
-**유닉스, 리눅스 기반 OS에서 파일 이름을 바꾸는게 익숙치 않으신 분들은 Step2를 반드시 하지 않으셔도 됩니다.** 설치프로그램이 자동으로 wp-config.php파일을 생성하므로 Step3를 그냥 넘어가셔도 됩니다.
-
-0. (안한 사람들)WordPress 파일 압축 해제
-1. `MySQL` (혹은 `MariaDB`)에 데이터베이스를 생성. 이 때 생성한 데이터베이스에 **읽기 및 쓰기 권한을 모두에게 풀 것.** ([MySQL 데이터베이스 생성 명령어](https://codex.wordpress.org/Installing_WordPress#Using_the_MySQL_Client))
-2. *(Optional)* `wp-config-sample.php` 파일을 `wp-config.php`로 바꾸기. 그리고 나서 파일을 다음 설명에 맞추어 수정하고, Step1에서 생성한 데이터베이스 정보 기입.
-3. WordPress파일을 원하는 위치에 옮기기.
-   - 만약 루트 도메인에 워드프레스를 연결시킬 경우(https://www.example.com/), 모든 파일을 압축 해제 후 안의 내용물을 전부 루트 디렉토리에 넣을 것.
-   - 만약 서브디렉토리에 넣을 경우(예시로 https://www.example.com/blog), blog 폴더를 생성하고, 모든 파일을 압축 해제 후 안의 내용물을 전부 blog 폴더에 넣을 것.
-   - 만약 FTP프로그램을 사용하고, 강제로 알파벳을 소문자로 만들 경우, 소문자로 만드는 기능을 해제할 것!
-4. ~~런~~ 홈페이지에 접속하여 설치를 계속할 것.
-
-이게 끝이랍니다!
+이게 끝이랍니다! 이제 홈페이지로 접속하면 워드프레스가 설치되어있을 것입니다.
 
 
-
-## Detailed Instructions
-
-#### 상세한 설치법
+## 상세 설치법
 
 ### Step 1. 다운로드 및 압축 해제
 
 WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로드 받은 후, 압축을 풉니다.
 
-- 워드프레스를 원격 웹서버에 업로드할 경우엔, 작업용 컴퓨터에 워드프레스 패키지를 받은 후에 압축을 푸세요.
-
-- FTP를 사용한다면, Step 2를 건너뛰세요. (파일 업로드는 나중에 다룹니다.)
-
-- 만약 FTP가 아닌 쉘을 통해 웹서버에 엑세스하고, CLI환경에 익숙하신 분이라면, wget(혹은 lynx 또는 콘솔환경에서 쓰이는 웹브라우저)을 사용하십시오.
-
+- 워드프레스를 원격 웹서버에 업로드할 경우엔, 서버 말고 평소 작업할 때 사용하는 컴퓨터에 워드프레스 패키지를 받은 후에 압축을 푸세요.
+- FTP를 사용한다면, Step 2로 진행하세요. (파일 업로드는 나중에 다룹니다.)
+- 만약 FTP가 아닌 쉘을 통해 웹서버에 바로 엑세스할 수 있고, CLI환경에 익숙하신 분이라면, 그리고 [FTP 사용](https://wordpress.org/support/article/glossary/#ftp)을 지양하고싶은 분이라면 `wget`(혹은 `lynx` 또는 콘솔환경을 지원하는 웹브라우저)을 사용하십시오.
   - `wget https://wordpress.org/latest.tar.gz/`
-
-  - 그리고 패키지를 다음 명령으로 압푹을 푸세요.
-
+  - 파일을 다운로드한 후, 다음 명령으로 압축을 푸세요.
     `tar -xzvf latest.tar.gz`
-
-    > 참고: tar **-z** 옵션은 gzip으로 압축된 파일을 풀어준다.
-
-
+    > 각주: <br>
+    > tar **-z** 옵션은 gzip으로 압축된 파일을 풀어준다.
 
 위 명령어대로 진행하면 다운로드 받은 압축파일이 해당 경로에 `wordpress`폴더로  풀립니다. 
 
@@ -84,98 +78,42 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 ### Step 2. DB 및 DB유저 생성
 
-만약 호스팅 업체를 사용하고 있으시다면, 호스팅 업체에서 Wordpress 데이터베이스 세팅이 되어 있거나 자동으로 데이터베이스를 세팅할 수 있도록 할겁니다.(아니라면.. 흠...) 호스팅 업체의 홈페이지를 살펴보며, 데이터베이스 설정을 수동으로 진행해야 하는지를 확인해보십시오. 
+만약 호스팅 업체를 사용하고 있으시다면, 호스팅 업체에서 Wordpress 데이터베이스 세팅이 되어 있거나 자동으로 데이터베이스를 세팅할 수 있는 솔루션을 제공할것입니다.(아니라면.. 흠...) 호스팅 업체의 홈페이지를 살펴보며, 데이터베이스 설정을 수동으로 진행해야 하는지를 확인해보십시오. 
 
+만약 수동으로 데이터베이스와 username을 생성해야 한다면, 아래의 [phpMyAdmin을 사용할 경우 데이터베이스를 생성하는 방법](#phpMyAdmin을-사용할-경우)을 따라 진행하시면 됩니다. Plesk, cPanel, mySQL과 같은 다른 툴을 사용하신다면, [워드프레스를 위한 데이터베이스 생성하기(영문)](./appendix/creating-database-for-wordpress.md)) 문서를 참고하세요.
 
-
-만약 수동으로 데이터베이스를 생성해야 한다면, 다음 설명서를 따라 진행하십시오.
-
-- [phpMyAdmin 엑세스하기](https://codex.wordpress.org/WordPress_Backups#Accessing_phpMyAdmin)
-- [Plesk로 설정하기](https://codex.wordpress.org/Installing_WordPress#Using_Plesk)
-- [cPannel로 설정하기](https://codex.wordpress.org/Installing_WordPress#Using_cPanel)
-- [phpMyAdmin으로 설정하기](https://codex.wordpress.org/Installing_WordPress#Using_cPanel)
-
-> 참고1: 위에 문서들은 GUI를 이용해서 DB 생성 및 사용자 설정을 하는 과정입니다. Wordpress에 글을 올리거나, 댓글을 달거나 등의 다양한 정보들을 관리하는 저장소를 생성한다고 생각하심 됩니다.
+> *각주:* 
+> 1. 위에 문서들은 GUI를 이용해서 DB 생성 및 사용자 설정을 하는 과정입니다. Wordpress에 글을 올리거나, 댓글을 달거나 등의 다양한 정보들을 관리하는 저장소를 생성한다고 생각하심 됩니다.
 >
-> 참고2: GUI로 생성하는 과정은 따로 번역하지 않겠습니다..ㅎㅎ ~~(절대 귀찮아서가 아닙ㄴ..)~~ 저것까지 번역하는건 Toooo Much 인듯 합니다...ㅎ
+> 2. 이전의 튜토리얼 본문에서 mySQL CLI를 사용하는 방법은 위의 데이터베이스 생성하기 문서로 이동하였으니 해당 문서를 참고해주십시오.
 
 
+만약 구축하려는 서버에서 오직 하나의 데이터베이스를 사용하고 있는데(!) 이미 사용하고 있다면(!!) 워드프레스를 그냥 안에 설치할 수 있습니다(!!!). 다만 DB Table끼리 구별 가능한 접두어(prefix)를 두어 기존 데이터를 덮어쓰지 않도록 방지할 수 있도록 하면 됩니다.
 
-만약 Wordpress를 내 웹서버에 설치하는 경우, 다음 설명서 중 하나를 따라서 진행하십시오.
+> 원문은 이렇게 되어 있는데.. 여건이 된다면 추천하지는 않는 방법입니다.. (만에하나 테이블 데이터가 덮어쓰이거나 실수로 날리게 되면... Holy...)
 
-- phpMyAdmin이 설치되어 있는 경우, [phpMyAdmin 엑세스하기](https://codex.wordpress.org/WordPress_Backups#Accessing_phpMyAdmin)를 참고하세요. (원문)
-- MySQL Client가 설치되어 있는 경우, [아래](#Using the MySQL Client) 설치법을 참고하면 됩니다. (번역해둠!)
+#### phpMyAdmin을 사용할 경우
 
+여러분의 웹서버에 [phpMyAdmin](https://wordpress.org/support/article/glossary/#phpmyadmin)이 설치되어있다면, 이 설명서를 따라 워드프레스를 위한 데이터베이스와 username을 생성할 수 있습니다. 참고로, 대부분의 리눅스 배포판에서 자동으로 PhpMyAdmin을 설치할 수 있습니다.
 
-
-만약 구축하려는 서버에서 오직 하나의 데이터베이스를 사용하고 있는데(!) 이미 사용하고 있다면(!!) 워드프레스를 그냥 안에 설치할 수 있습니다(!!!)
-
-다만 DB Table끼리 구별 가능한 접두어(prefix)를 두어 기존 데이터를 덮어쓰지 않도록 방지할 수 있도록 하면 됩니다.
-
-> 원문은 이렇게 되어 있는데.. 구체적인 방법은 모르겠고,, 여건이 된다면 추천하지는 않는 방법입니다.. (만에하나 작업하다 실수로 날리거나 덮어쓰면... Holy...)
+***참고:*** *이 설명서는 phpMyAdmin 4.4 기준으로 작성되었습니다. phpMyAdmin 설정 화면이 버전별로 살짝 다를 수 있습니다.*
 
 
-
-#### Using the MySQL Client
-
-쉘을 통해 MySQL 또는 MariaDB에서 `users`와 `databases`를 생성할 수 있습니다. 아래 쉘스크립트를 쉘에 ~~(복붙)~~사용하면 빠르게 생성됩니당.
-
-```shell
-# <- 이 샾이 앞에 있으면 주석이란 뜻입니다.
-# 그러니 주석을 쉘에 넣으면 안되겠죠..?
-# $ 기호도 쉘을 표현한 기호이므로 아래 mysql -u 철수 -p만 복붙하시면 됩니당.
-# mysql>도 MySQL 인터프리터(?) 표시이므로 그 뒤에만 복붙합니다.
+_____
+> 번역중입니다.
 
 
-# DBMS(MySQL) 접속
-$ mysql -u 철수 -p 
-# '철수'는 예시 관리자계정이름(username)입니다. (MySQL 계정 설정법은 아래에 있습니다!)
-# 이 다음에 Enter password: 가 나오면 해당 계정 비밀번호를 입력합니다.
+1. 좌측 드롭다운 메뉴에 **워드프레스와 관련된 데이터베이스가 생성되지 않았다면**, 새로 데이터베이스를 생성합니다.
+  1. 데이터베이스의 이름을 선택합니다: ...
+![phpMyAdmin language encoding drop down](https://i0.wp.com/wordpress.org/support/files/2018/11/phpMyAdmin_create_database_4.4.jpg?w=688&ssl=1)
 
+2. 좌측 상단에 **phpMyAdmin** 아이콘을 클릭하여 메인페이지로 이동한 후에, **Users**탭을 클릭합니다. ...
+![phpMyAdmin Users Tab](https://i1.wp.com/wordpress.org/support/files/2018/11/users.jpg?resize=768%2C500&ssl=1)
 
-# Database 생성하기
-mysql> CREATE DATABASE wordpress;
-## 마찬가지로 wordpress도 예시의 DB 이름입니다. (밑에도 설명하겠지만, wordpress가 권장하는 DB이름입니다..)
-# Query OK, 1 row affected (0.00 sec)
-## 정상적으로 수행되었다면, 위와 같은 메시지가 뜹니다.
+  1. ...
+  2. ...
 
-
-# Database 권한 부여
-mysql> GRANT ALL PRIVILEGES ON wordpress.* TO "철수"@"hostname" IDENTIFIED BY "철수의 비밀번호";
-## asdf 사용자에게 qwer DB의 읽기쓰기 권한을 주는 것입니다.
-# Query OK, 0 row affected (0.00 sec)
-## 정상적으로 수행되었다면, 위와 같은 메시지가 뜹니다.
-
-
-# 권한 설정 Flush
-mysql> FLUSH PRIVILEGES;
-## 설정한 권한을 적용하는 겁니다.
-# Query OK, 0 row affected (0.00 sec)
-## 정상적으로 수행되었다면, 위와 같은 메시지가 뜹니다.]
-
-
-# DBMS 접속 끊기
-mysql> EXIT
-## 뭐 더 설명이 필요할까요? ㅋ
-
-```
-
-
-
-- `root` 계정을 Wordpress DB 관리 계정으로 사용할 수도 있습니다만..  시스템 root 유저로 mysql 권한을 갖지 않도록 root 계정이 아닌 계정을 mysql admin 계정으로 사용하는 것이 안전합니다. (작업할 때, 루트로 작업하는 것을 최소화한다면 DB를 털릴 가능성을 줄일 수 있습니다.)
-- `wordpress` 혹은 `blog`를 DATABASE 이름으로 설정하시길 권장합니다.
-- *워드프레스 `username`*으로 `wordpress`를 설정하길 권장합니다...**만**, 이걸 보고 아마 전세계 대부분 사람들이 이름을 `wordpress`로 설정할 수 있다는 점을 유념하시길 바랍니다.
-  - `hostname`은 거의 `localhost`일겁니다. 만약 호스트 이름이`localhost`가 아닌데 값을 모를 경우에는, 당신의 시스템 관리자와 함께 확인하십시오 당신이 당신 wordpress의 관지라가 아닌지를. 반대로 당신이 관리자라면, MySQL 접속 계정이 `root`가 아닌 일반 계정을 사용하고 있는지 확인해야 합니다.
-- *비밀번호*는 반드시 복잡하고 유추하기 어려워야 합니다. (영어 대문자, 소문자, 숫자, 기호를 섞어 쓰기를 권장합니다.) 일반적인 단어를 안쓰도록 하기 위해 문장의 초성만 따서 비번을 설정하는 방법을 쓰면 좋습니다. ~~(초성놀이)~~
-
-ㅁㄴㅇㄹ
-
-
-
-#### Using DirectAdmin
-
-a. 귀찮앙
-
+![phpMyAdmin03](https://i2.wp.com/wordpress.org/support/files/2018/11/phpMyAdmin_server_info_4.4.jpg?w=682&ssl=1)
 
 
 ### Step 3: wp-config.php 설정하기
