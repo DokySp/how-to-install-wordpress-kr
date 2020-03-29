@@ -20,4 +20,4 @@
 
 블로그를 설치하실 때, [파일을 업로드(영문)](https://wordpress.org/support/article/using-filezilla/)하거나 [파일 권한을 설정(영문)](https://wordpress.org/support/article/changing-file-permissions/)하기 위해 FTP 프로그램을 사용하셔야 합니다. [FileZilla(영문)](https://wordpress.org/support/article/using-filezilla/)를 사용하여 위와 같은 작업을 할 수 있습니다.
 
-이제 설치를 위한 모든 준비는 끝났습니다. [설치](../readme.md) 페이지로 돌아가도록 합시다!
+이제 설치를 위한 모든 준비는 끝났습니다. [설치](../README.md) 페이지로 돌아가도록 합시다!
