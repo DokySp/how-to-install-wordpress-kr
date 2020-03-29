@@ -8,10 +8,9 @@
 
 ## 목차
 
-- [WordPress 설치 전 필요한 것들](#things-to-know-before-installing-wordpress)
-- [가장 많이 쓰이는 5분 설치법](#famous-5-minute-installation)
-- [상세한 설치법](#detailed-instructions)
-- [NGINX 세팅하기](https://github.com/DokyoonKim/how-to-install-wordpress-kr/blob/master/appendix/setting-nginx.md)
+- [간단 설치법](#간단-설치법)
+- [상세 설치법](#상세-설치법)
+- [NGINX 세팅하기](./appendix/setting-nginx.md)
 
 
 ## 워드프레스 설치하기
@@ -21,21 +20,6 @@
 
 워드프레스를 설치하기 전에, 몇 가지 진행하셔야 할 것들이 있습니다. [워드프레스 설치 전에](./appendix/before-you-install.md)문서를 참고하세요.
 만약, 여러 개의 워드프레스 인스턴스가 필요한 경우, [여러 개 워드프레스 인스턴스 설치하기(영문)](https://wordpress.org/support/article/installing-multiple-blogs/)문서를 참고하세요.
-
-
-<span>
-1. 서버 환경이 다음 조건을 만족하는지 확인
-   - `PHP 7.3` 이상
-   - `MySQL 5.6` 혹은 `MariaDB 10.0` 이상
-   - HTTPS 지원
-   - 웹 서버 프로그램: `nginx` 또는 `apache` 환경에서 가장 최적하게 동작함.
-2. 최신버전 WordPress 다운로드
-
-> https://wordpress.org/download/
-
-3. 다운로드파일 압축해제 (`tar.gz` 혹은 `zip`파일)
-4. 비밀키를 위한 안전한 비밀번호 생각하기 (`wp-config.php` 파일 편집 시 필요)
-</span>
 
 
 ## 간단 설치법
