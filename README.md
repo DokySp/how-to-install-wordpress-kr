@@ -2,9 +2,10 @@
 
 - 출처: [wordpress.org](https://wordpress.org/support/article/how-to-install-wordpress/)
 - 번역: 김도균([@DokySp](https://github.com/dokysp))
-- 작성일: 2019월 2월 8일
+- 최초 작성일: 2019년 2월 8일
+- 최종 수정일: 2020년 3월 29일
 
- - TODO: 문서 내 링크를 절대경로로 바꾸어주어야 함!
+- TODO: 문서 내 링크를 절대경로로 바꾸어주어야 함!
 
 
 ## 목차
