@@ -5,7 +5,6 @@
 - 작성일: 2019월 2월 8일
 
 
-
 ## 목차
 
 - [간단 설치법](#간단-설치법)
@@ -53,7 +52,7 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
   - `wget https://wordpress.org/latest.tar.gz/`
   - 파일을 다운로드한 후, 다음 명령으로 압축을 푸세요.
     `tar -xzvf latest.tar.gz`
-    > 각주: <br>
+    > **_각주:_** <br>
     > tar **-z** 옵션은 gzip으로 압축된 파일을 풀어준다.
 
 위 명령어대로 진행하면 다운로드 받은 압축파일이 해당 경로에 `wordpress`폴더로  풀립니다. 
@@ -83,26 +82,34 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 ***참고:*** *이 설명서는 phpMyAdmin 4.4 기준으로 작성되었습니다. phpMyAdmin 설정 화면이 버전별로 살짝 다를 수 있습니다.*
 
 
-_____
-> 번역중입니다.
-
 
 1. 좌측 드롭다운 메뉴에 **워드프레스와 관련된 데이터베이스가 생성되지 않았다면**, 새로 데이터베이스를 생성합니다.
-  1. 데이터베이스의 이름을 선택합니다: ...
+  1. 데이터베이스의 이름을 선택합니다. `wordpress` 혹은 `blog` 같은 이름이 좋습니다. 그러나 대부분의 호스팅 업체들이 여러분의 계정명과 언더바(_)로 시작하는 것을 요구할 것입니다. 따라서 여러분 컴퓨터에서 작업을 진행하더라도, 여러분의 서버가 호스팅 업체의 규칙을 따를 수 있도록 해서 생성한 데이터베이스가 별도의 수정 없이 호스팅 업체로 전환될 수 있도록 하게 하기 위해서 사용하는 호스팅 업체에서 데이터베이스 이름에 대한 요구사항을 직접 확인할 것을 권장합니다. **Create database** 칸에 데이터베이스 이름을 입력하고 여러분이 사용하는 최적의 언어와 인코딩 조합을 선택하세요. 대부분의 경우, "utf8\_"시리즈를 선택하는데, 여러분 언어에 최적화된 인코딩을 찾을 수 없다면 "utf8mb4\_general\_ci"를 선택하세요. ([해당 문서](https://make.wordpress.org/core/2015/04/02/the-utf8mb4-upgrade/) 참고)
+
+  > **_각주:_** <br>
+  > 한국어의 경우, "utf8mb4\_general\_ci"를 사용하면 됩니다. (이모지까지 지원한다네요!)
+
 ![phpMyAdmin language encoding drop down](https://i0.wp.com/wordpress.org/support/files/2018/11/phpMyAdmin_create_database_4.4.jpg?w=688&ssl=1)
 
-2. 좌측 상단에 **phpMyAdmin** 아이콘을 클릭하여 메인페이지로 이동한 후에, **Users**탭을 클릭합니다. ...
+2. 좌측 상단에 **phpMyAdmin** 아이콘을 클릭하여 메인페이지로 이동한 후에, **Users** 탭을 클릭합니다. 워드프레스와 연관된 user가 리스트에 없다면 새로 생성합니다: 
 ![phpMyAdmin Users Tab](https://i1.wp.com/wordpress.org/support/files/2018/11/users.jpg?resize=768%2C500&ssl=1)
 
-  1. ...
-  2. ...
-
+  1. **Add user**를 클릭합니다.
+  2. 워드프레스에서 사용할 username('`wordpress`'를 추천)을 **User name** 칸에 입력합니다. (드롭다운 메뉴에 **Use text field**가 체크되어있어야 합니다!)
+  3. 안전한 비밀번호(영어 대소문자, 숫자, 특수기호 사용 권장)를 **Password** 칸에 입력합니다. (드롭다운 메뉴에 **Use text field**가 체크되어있어야 합니다!) 그리고 **Re-ypte** 칸에 입력한 비밀번호를 한 번 더 입력합니다.
+  4. username과 비밀번호를 입력합니다.
+  5. **Global privileges** 설정을 기본 옵션 그대로 둡니다.
+  6. **Go** 버튼을 누릅니다.
+  7. **User** 화면으로 돌아와 방금 생성한 계정에 있는 **Edit privileges** 아이콘을 클릭합니다.
+  8. **Database-specific privileges** 섹션에서 **Add privileges to the following database** 드롭다운에 방금 생성한 데이터베이스를 선택한 후, **Go** 버튼을 누릅니다.
+  9. 페이지와 선택한 데이터베이스의 권한이 새로 고침 됩니다. **Check All** 버튼을 눌러 모든 권한을 선택하고 **Go** 버튼을 누릅니다.
+  10. 결과 페이지에서, 페이지 상단에 호스트 이름이 **Server:** 뒤에 잘 표시되는지 확인하세요. (아마 대부분 **localhost**일 것입니다.)
 ![phpMyAdmin03](https://i2.wp.com/wordpress.org/support/files/2018/11/phpMyAdmin_server_info_4.4.jpg?w=682&ssl=1)
 
 
 ### Step 3: wp-config.php 설정하기
 
-`wp-config.php`파일을 직접 생성하여 만들거나, 이번 단계를 건너 뛰고 [Step 5]()에서 WordPress 설치 스크립트가 스스로 설정하도록 하는 두 방법이 있습니다. (대신 어느 방법이나 Step 2에서 설정한 DB 관련 정보들을 알고 있어야 합니다.)
+`wp-config.php`파일을 직접 생성하여 만들거나, 이번 단계를 건너 뛰고 [Step 5](Step-5:-설치-스크립트-실행)에서 WordPress 설치 스크립트가 스스로 설정하도록 하는 두 방법이 있습니다. (대신 어느 방법이나 Step 2에서 설정한 DB 관련 정보들을 알고 있어야 합니다.)
 
 
 
@@ -202,24 +209,20 @@ $ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니�
 
 Point a web browser to start the installation script.
 
-- If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
-- If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
+ - If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
+ - If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
 
+#### Setup configuration file
 
+If WordPress can’t find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php file`. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the `wp-config.php` file yourself (step 3)](Step-3:-wp-config.php-설정하기).
 
-#### 설정파일 설치
+![---](https://i0.wp.com/wordpress.org/support/files/2018/10/install-step3_v47.png?resize=784%2C563&ssl=1)
 
-If WordPress can't find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php` file. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the `wp-config.php` file yourself (step 3)](https://codex.wordpress.org/Installing_WordPress#Step_3:_Set_up_wp-config.php).
+#### Finishing installation
 
-[![install-step3.png](https://codex.wordpress.org/images/thumb/5/5a/install-step3.png/600px-install-step3.png)](https://codex.wordpress.org/File:install-step3.png)
+The following screenshots show how the installation progresses. Notice that in entering the details screen, you enter your site title, your desired user name, your choice of a password (twice), and your e-mail address. Also displayed is a check-box asking if you would like your blog to appear in search engines like Google and DuckDuckGo. Leave the box unchecked if you would like your blog to be visible to everyone, including search engines, and check the box if you want to block search engines, but allow normal visitors. Note all this information can be changed later in your [Administration Screen](https://wordpress.org/support/article/administration-screens/).
 
-
-
-#### 설치 마무리
-
-The following screenshots show how the installation progresses. Notice that in entering the details screen, you enter your site title, your desired user name, your choice of a password (twice), and your e-mail address. Also displayed is a check-box asking if you would like your blog to appear in search engines like Google and Technorati. Leave the box unchecked if you would like your blog to be visible to everyone, including search engines, and check the box if you want to block search engines, but allow normal visitors. Note all this information can be changed later in your [Administration Screens](https://codex.wordpress.org/Administration_Screens).
-
-[![install-step5.png](https://codex.wordpress.org/images/thumb/1/1b/install-step5.png/600px-install-step5.png)](https://codex.wordpress.org/File:install-step5.png)
+![---](https://i2.wp.com/wordpress.org/support/files/2018/10/install-step5_v47.png?resize=795%2C835&ssl=1)
 
 **Note: You should not use "admin" as a user id as shown above!**
 
@@ -227,7 +230,7 @@ If you successfully install the WordPress, login prompt will be displayed.
 
 
 
-#### 설치 스크립트 문제해결
+#### Install script troubleshooting
 
 - 만약 설치 스크립트 동작 중 DB 관련 에러가 난다면:
 
@@ -240,4 +243,27 @@ If you successfully install the WordPress, login prompt will be displayed.
     ```shell
     $ sudo service mysql restart
     ```
+
+
+ - If you get an error about the database when you run the install script:
+   - Go back to [Step 2]() and [Step 3](), and make sure you entered all the correct database information into `wp-config.php`.
+   - Make sure you granted your WordPress user permission to access your WordPress database in **Step 3**.
+   - Make sure the database server is running.
+
+## Common Installation Problems
+
+The following are some of the most common installation problems. For more information and troubleshooting for problems with your WordPress installation, check out [FAQ Installation](https://wordpress.org/support/article/faq-installation/) and [FAQ Troubleshooting](https://wordpress.org/support/article/faq-troubleshooting/).
+
+**I see a directory listing rather than a web page.**
+
+The web server needs to be told to view `index.php` by default. In Apache, use the `DirectoryIndex index.php` directive. The simplest option is to create a file named `.htaccess` in the installed directory and place the directive there. Another option is to add the directive to the web server’s configuration files.
+
+**I see lots of *Headers already sent* errors. How do I fix this?**
+
+You probably introduced a syntax error in editing `wp-config.php`.
+
+
+
+
+
 
