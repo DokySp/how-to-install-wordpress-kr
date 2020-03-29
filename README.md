@@ -4,14 +4,15 @@
 - 번역: 김도균([@DokySp](https://github.com/dokysp))
 - 최초 작성일: 2019년 2월 8일
 - 최종 수정일: 2020년 3월 29일
-- TODO: 문서 내 링크를 절대경로로 바꾸어주어야 함!
-
+- TODO: 
+   - ~~문서 내 링크를 절대경로로 바꾸어주어야 함!~~
+   - 번역 후 문법검사!
 
 ## 목차
 
 - [간단 설치법](#간단-설치법)
 - [상세 설치법](#상세-설치법)
-- [NGINX 세팅하기](./appendix/setting-nginx.md)
+- [NGINX 세팅하기](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/setting-nginx.md)
 
 
 ## 워드프레스 설치하기
@@ -19,7 +20,7 @@
 
 #### WordPress 설치 전 확인할 사항
 
-워드프레스를 설치하기 전에, 몇 가지 진행하셔야 할 것들이 있습니다. [워드프레스 설치 전에](./appendix/before-you-install.md)문서를 참고하세요.
+워드프레스를 설치하기 전에, 몇 가지 진행하셔야 할 것들이 있습니다. [워드프레스 설치 전에](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/before-you-install.md)문서를 참고하세요.
 만약, 여러 개의 워드프레스 인스턴스가 필요한 경우, [여러 개 워드프레스 인스턴스 설치하기(영문)](https://wordpress.org/support/article/installing-multiple-blogs/)문서를 참고하세요.
 
 
@@ -35,7 +36,7 @@
    - 만약 루트 도메인에 워드프레스를 연결시킬 경우(ex> `https://www.example.com/`), 모든 파일을 압축 해제 후 안의 내용물을 전부 서버의 루트 디렉토리(ex>Apache의 경우, `/var/www/html`)에 넣을 것.
    - 만약 서브디렉토리에 넣을 경우(ex> `https://www.example.com/blog`), 서버의 루트 디렉토리에 blog 폴더를 생성하고, 모든 파일을 압축 해제 후 안의 내용물을 전부 blog 폴더에 넣을 것.
    - 만약 FTP프로그램이 강제로 알파벳을 소문자로 만들 경우, 이 기능을 해제하세요!
-5. ~~런~~ 홈페이지에 접속하여 설치를 계속 진행하세요. 
+5. 홈페이지에 접속하여 설치를 계속 진행하세요. 
    - 워드프레스를 서버의 루트 디렉토리에 설치한 경우, `https://example.com`로 접속!
    - 워드프레스를 서버의 서브 디렉토리(ex> `blog`)에 설치한 경우, `https://example.com/blog`로 접속!
 
@@ -65,7 +66,7 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 만약 호스팅 업체를 사용하고 있으시다면, 호스팅 업체에서 Wordpress 데이터베이스 세팅이 되어 있거나 자동으로 데이터베이스를 세팅할 수 있는 솔루션을 제공할것입니다.(아니라면.. 흠...) 호스팅 업체의 홈페이지를 살펴보며, 데이터베이스 설정을 수동으로 진행해야 하는지를 확인해보십시오. 
 
-만약 수동으로 데이터베이스와 username을 생성해야 한다면, 아래의 [phpMyAdmin을 사용할 경우 데이터베이스를 생성하는 방법](#phpMyAdmin을-사용할-경우)을 따라 진행하시면 됩니다. Plesk, cPanel, mySQL과 같은 다른 툴을 사용하신다면, [워드프레스를 위한 데이터베이스 생성하기(영문)](./appendix/creating-database-for-wordpress.md)) 문서를 참고하세요.
+만약 수동으로 데이터베이스와 username을 생성해야 한다면, 아래의 [phpMyAdmin을 사용할 경우 데이터베이스를 생성하는 방법](#phpMyAdmin을-사용할-경우)을 따라 진행하시면 됩니다. Plesk, cPanel, mySQL과 같은 다른 툴을 사용하신다면, [워드프레스를 위한 데이터베이스 생성하기(번역중)](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/creating-database-for-wordpress.md)) 문서를 참고하세요.
 
 > *각주:* 
 > 1. 위에 문서들은 GUI를 이용해서 DB 생성 및 사용자 설정을 하는 과정입니다. Wordpress에 글을 올리거나, 댓글을 달거나 등의 다양한 정보들을 관리하는 저장소를 생성한다고 생각하심 됩니다.
@@ -187,45 +188,42 @@ $ vim wp-config.php   # nano 같은 다른 편집기를 사용하셔도 됩니�
 
 
 #### 루트(최상위) 디렉토리에 설치하는 경우
- - If you need to upload your files to your web server, use an [FTP](https://wordpress.org/support/article/glossary/#ftp) client to upload all the contents of the `wordpress` directory (but not the directory itself) into the root directory of your website.
- - If your files are already on your web server, and you are using [shell](https://wordpress.org/support/article/glossary/#shell) access to install WordPress, move all of the contents of the `wordpress` directory (but not the directory itself) into the root directory of your website.
-
+ - 파일을 웹서버에 업로드할 필요가 있는 경우, `wordpress` 디렉토리 안에 모든 파일을 웹사이트의 루트 디렉토리에 업로드하기 위해 [FTP](https://wordpress.org/support/article/glossary/#ftp) 클라이언트를 사용하세요.
+ - 파일이 이미 웹서버에 올라가있고, 워드프레스를 설치하기 위해 웹서버에 [쉘](https://wordpress.org/support/article/glossary/#shell)을 사용하는 경우, `wordpress` 디렉토리 안에 모든 파일을 웹사이트의 루트 디렉토리로 옮기세요.
 
 #### 서브 디렉토리에 설치하는 경우
-If you need to upload your files to your web server, rename the `wordpress` directory to your desired name, then use an [FTP](https://wordpress.org/support/article/glossary/#ftp) client to upload the directory to your desired location within the root directory of your website.
-If your files are already on your web server, and you are using [shell](https://wordpress.org/support/article/glossary/#shell) access to install WordPress, move the `wordpress` directory to your desired location within the root directory of your website, and rename the directory to your desired name.
-
-
+- 파일을 웹서버에 업로드할 필요가 있는 경우, `wordpress` 디렉토리를 여러분이 원하는 이름으로 바꾼 후, 폴더 안에 모든 파일을 웹사이트의 루트 디렉토리에서 원하는 곳에 업로드하기 위해 [FTP](https://wordpress.org/support/article/glossary/#ftp) 클라이언트를 사용하세요.
+- 파일이 이미 웹서버에 올라가있고, 워드프레스를 설치하기 위해 웹서버에 [쉘](https://wordpress.org/support/article/glossary/#shell)을 사용하는 경우, `wordpress` 디렉토리 안에 모든 파일을 웹사이트의 루트 디렉토리에 원하는 이름의 디렉토리를 생성한 후 그 안으로 옮기세요.
 
 
 ### Step 5: 설치 스크립트 실행
 
 Point a web browser to start the installation script.
 
-- If you placed the WordPress files in the root directory, you should visit: `http://example.com/wp-admin/install.php`
-- If you placed the WordPress files in a subdirectory called `blog`, for example, you should visit: `http://example.com/blog/wp-admin/install.php`
+- 루트 디렉토리에 워드프레스를 설치한 경우, 이 주소로 접속하세요: `http://example.com/wp-admin/install.php`
+- 서브 디렉토리(ex> `blog`)에 워드프레스를 설치한 경우, 이 주소로 접속하세요: `http://example.com/blog/wp-admin/install.php`
 
 
 #### Setup configuration file
 
-If WordPress can’t find the `wp-config.php` file, it will tell you and offer to try to create and edit the file itself. (You can also do this directly by loading `wp-admin/setup-config.php` in your web browser.) WordPress will ask you the database details and write them to a new `wp-config.php` file. If this works, you can go ahead with the installation; otherwise, go back and [create, edit, and upload the wp-config.php file yourself (step 3)](Step-3:-wp-config.php-설정하기).
+워드프레스가 `wp-config.php` 파일을 찾지 못하는 경우, 워드프레스가 이 사실을 알리고 스스로 파일을 생성하고 수정하려 시도할 것입니다. (또한 직접적으로 `wp-admin/setup-config.php`파일을 웹브라우저에서 로딩시킬 수도 있습니다.) 워드프레스는 데이터베이스에 대한 자세한 내용을 물어볼 것이며, 기입한 내용을 새로운 `wp-config.php` 파일에 기록합니다. 만약, 이게 동작한다면, 계속해서 매뉴얼을 진행하면 되고, 그 반대라면 Step 3로 돌아가서 [wp-config.php 파일을 직접 생성하고, 수정하고, 업로드하셔야 합니다.](Step-3:-wp-config.php-설정하기)
 
 ![---](https://i0.wp.com/wordpress.org/support/files/2018/10/install-step3_v47.png?resize=784%2C563&ssl=1)
 
 #### Finishing installation
 
-The following screenshots show how the installation progresses. Notice that in entering the details screen, you enter your site title, your desired user name, your choice of a password (twice), and your e-mail address. Also displayed is a check-box asking if you would like your blog to appear in search engines like Google and DuckDuckGo. Leave the box unchecked if you would like your blog to be visible to everyone, including search engines, and check the box if you want to block search engines, but allow normal visitors. Note all this information can be changed later in your [Administration Screen](https://wordpress.org/support/article/administration-screens/).
+밑에 스크린샷은 설치가 어떻게 진행되는지를 보여줍니다. 이 세부 정보 페이지로 들어가게 되면 사이트의 제목, user name, 비밀번호, 이메일 주소를 입력한다는 것을 기억하세요. 또한 Google 이나 DuckDuckGo 같은 검색엔진에서 보여지기를 원하는지를 물어보는 체크박스를 표시합니다. 블로그가 검색엔진을 포함해서 모두에게 보여지기를 원한다면 박스를 체크하지 않은 상태로 두세요. 블로그가 검색엔진에서는 보이지 않지만 접속 가능하게 하고 싶으면 체크를 하시면 됩니다. 위의 모든 정보는 여러분의 [관리자 페이지](https://wordpress.org/support/article/administration-screens/)에서 바꿀 수 있습니다.
 
 ![---](https://i2.wp.com/wordpress.org/support/files/2018/10/install-step5_v47.png?resize=795%2C835&ssl=1)
 
-<div>**Note: You should not use "admin" as a user id as shown above!**</div>
+<div>**_참고:_** *절대로 위에 사진처럼 user id를 "admin"으로 사용하지 마십시오!*</div>
 
-If you successfully install the WordPress, login prompt will be displayed.
+성공적으로 워드프레스를 설치했다면, 로그인창이 표시될 것입니다.
 
 
-#### Install script troubleshooting
+#### 설치 스크립트 문제해결
 
-- 만약 설치 스크립트 동작 중 DB 관련 에러가 난다면:
+- 만약 설치 스크립트 동작 중 데이터베이스 관련 에러가 난다면:
   - [Step 2]()와 [Step 3]()로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
   - **Step 3**에서 user에게 워드프레스 데이터베이스 접근 권한을 할당했는지 확인합니다.
   - 데이터베이스 서버가 제대로 작동하고 있는지 확인합니다.
@@ -234,4 +232,4 @@ If you successfully install the WordPress, login prompt will be displayed.
     ```
 
 ## 자주 묻는 질문
-[해당 문서](./appendix/common-installation-problems.md) 참고.
+[해당 문서](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/common-installation-problems.md) 참고.
