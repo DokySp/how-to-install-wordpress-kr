@@ -3,7 +3,7 @@
 - 출처: [wordpress.org](https://wordpress.org/support/article/how-to-install-wordpress/)
 - 번역: 김도균([@DokySp](https://github.com/dokysp))
 - 최초 작성일: 2019년 2월 8일
-- 최종 수정일: 2020년 3월 29일
+- 최종 수정일: 2020년 4월 2일
 - TODO: 
    - ~~문서 내 링크를 절대경로로 바꾸어주어야 함!~~
    - 번역 후 문법검사!
@@ -16,9 +16,10 @@
 
 
 ## 워드프레스 설치하기
-워드프레스는 설치가 쉬운 것으로 잘 알려져 있습니다. 대부분의 상황에서, 워드프레스 블로그 설치는 괭장히 간단하며, 5분 안에 모두 설치를 하실 수 있습니다. [많은 웹 호스팅 업체]가 [워드프레스 자동 설치(Fantastico 등) 도구]를 지원합니다. 그러나, 워드프레스를 직접 설치하실 경우, 이 가이드가 도움이 될것입니다.
 
-#### WordPress 설치 전 확인할 사항
+워드프레스는 설치가 쉬운 것으로 잘 알려져 있습니다. 대부분의 상황에서, 워드프레스 블로그 설치는 괭장히 간단하며, 5분 안에 모두 설치를 하실 수 있습니다. [많은 웹 호스팅 업체](https://wordpress.org/support/article/installing-wordpress-at-popular-hosting-companies/)가 [워드프레스 자동 설치(Fantastico 등) 도구](https://wordpress.org/support/article/automated-installation/)를 지원합니다. 그러나, 워드프레스를 직접 설치하실 경우, 이 가이드가 도움이 될것입니다.
+
+#### WordPress 설치 전 확인해야 하는 것들
 
 워드프레스를 설치하기 전에, 몇 가지 진행하셔야 할 것들이 있습니다. [워드프레스 설치 전에](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/before-you-install.md)문서를 참고하세요.
 만약, 여러 개의 워드프레스 인스턴스가 필요한 경우, [여러 개 워드프레스 인스턴스 설치하기(영문)](https://wordpress.org/support/article/installing-multiple-blogs/)문서를 참고하세요.
@@ -45,7 +46,7 @@
 
 ## 상세 설치법
 
-### Step 1. 다운로드 및 압축 해제
+### Step 1: 워드프레스 다운로드 및 압축 풀기
 
 WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로드 받은 후, 압축을 풉니다.
 
@@ -62,7 +63,7 @@ WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로�
 
 
 
-### Step 2. DB 및 DB유저 생성
+### Step 2: 데이터베이스와 데이터베이스의 username 만들기
 
 만약 호스팅 업체를 사용하고 있으시다면, 호스팅 업체에서 Wordpress 데이터베이스 세팅이 되어 있거나 자동으로 데이터베이스를 세팅할 수 있는 솔루션을 제공할것입니다.(아니라면.. 흠...) 호스팅 업체의 홈페이지를 살펴보며, 데이터베이스 설정을 수동으로 진행해야 하는지를 확인해보십시오. 
 
@@ -224,7 +225,7 @@ Point a web browser to start the installation script.
 #### 설치 스크립트 문제해결
 
 - 만약 설치 스크립트 동작 중 데이터베이스 관련 에러가 난다면:
-  - [Step 2]()와 [Step 3]()로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
+  - [Step 2](Step-2.-DB-및-DB유저-생성)와 [Step 3](Step-3:-wp-config.php-설정하기)로 되돌아간 후, `wp-config.php`파일에 모든 정보를 올바르게 적었는지 확인합니다.
   - **Step 3**에서 user에게 워드프레스 데이터베이스 접근 권한을 할당했는지 확인합니다.
   - 데이터베이스 서버가 제대로 작동하고 있는지 확인합니다.
     ```shell
