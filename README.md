@@ -204,13 +204,13 @@ Point a web browser to start the installation script.
 - 서브 디렉토리(ex> `blog`)에 워드프레스를 설치한 경우, 이 주소로 접속하세요: `http://example.com/blog/wp-admin/install.php`
 
 
-#### Setup configuration file
+#### `wp-config.php` 파일 설정하기
 
 워드프레스가 `wp-config.php` 파일을 찾지 못하는 경우, 워드프레스가 이 사실을 알리고 스스로 파일을 생성하고 수정하려 시도할 것입니다. (또한 직접적으로 `wp-admin/setup-config.php`파일을 웹브라우저에서 로딩시킬 수도 있습니다.) 워드프레스는 데이터베이스에 대한 자세한 내용을 물어볼 것이며, 기입한 내용을 새로운 `wp-config.php` 파일에 기록합니다. 만약, 이게 동작한다면, 계속해서 매뉴얼을 진행하면 되고, 그 반대라면 Step 3로 돌아가서 [wp-config.php 파일을 직접 생성하고, 수정하고, 업로드하셔야 합니다.](Step-3:-wp-config.php-설정하기)
 
 ![---](https://i0.wp.com/wordpress.org/support/files/2018/10/install-step3_v47.png?resize=784%2C563&ssl=1)
 
-#### Finishing installation
+#### 설치 마무리
 
 밑에 스크린샷은 설치가 어떻게 진행되는지를 보여줍니다. 이 세부 정보 페이지로 들어가게 되면 사이트의 제목, user name, 비밀번호, 이메일 주소를 입력한다는 것을 기억하세요. 또한 Google 이나 DuckDuckGo 같은 검색엔진에서 보여지기를 원하는지를 물어보는 체크박스를 표시합니다. 블로그가 검색엔진을 포함해서 모두에게 보여지기를 원한다면 박스를 체크하지 않은 상태로 두세요. 블로그가 검색엔진에서는 보이지 않지만 접속 가능하게 하고 싶으면 체크를 하시면 됩니다. 위의 모든 정보는 여러분의 [관리자 페이지](https://wordpress.org/support/article/administration-screens/)에서 바꿀 수 있습니다.
 
