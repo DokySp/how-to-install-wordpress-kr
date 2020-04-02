@@ -1,12 +1,10 @@
 # WordPress 설치하기
 
-- 출처: [wordpress.org](https://wordpress.org/support/article/how-to-install-wordpress/)
+- 원문: [wordpress.org](https://wordpress.org/support/article/how-to-install-wordpress/)
 - 번역: 김도균([@DokySp](https://github.com/dokysp))
 - 최초 작성일: 2019년 2월 8일
 - 최종 수정일: 2020년 4월 2일
-- TODO: 
-   - ~~문서 내 링크를 절대경로로 바꾸어주어야 함!~~
-   - 번역 후 문법검사!
+
 
 ## 목차
 
@@ -17,28 +15,28 @@
 
 ## 워드프레스 설치하기
 
-&nbsp;다양한 설치형 블로그 중 워드프레스는 설치가 용이한 것으로 유명합니다. [많은 웹 호스팅 업체(Eng)](https://wordpress.org/support/article/installing-wordpress-at-popular-hosting-companies/)가 [워드프레스 자동 설치(Fantastico 등) 도구(Eng)](https://wordpress.org/support/article/automated-installation/)를 지원할 뿐더러, 워드프레스의 설치 과정은 굉장히 간단해서 큰 문제가 없다면 5분 안에도 블로그를 설치를 할 수 있습니다. 이 문서는 워드프레스를 직접 설치하려는 분들을 위해 작성되었으니, 여러분들께 많은 도움이 되기를 바라겠습니다.
+&nbsp;다양한 설치형 블로그 중 워드프레스가 쉽게 설치할 수 있다는 것으로 유명하다는 것을 많이들 알고 계실거라 생각합니다. [많은 웹 호스팅 업체(Eng)](https://wordpress.org/support/article/installing-wordpress-at-popular-hosting-companies/)가 [워드프레스 자동 설치(Fantastico 등) 도구(Eng)](https://wordpress.org/support/article/automated-installation/)를 지원하는 것도 있지만, 워드프레스 그 자체로도 설치과정이 굉장히 간단해서 큰 문제가 없다면 5분 안에도 블로그를 설치를 할 수 있기도 합니다. 이 문서는 워드프레스를 직접 설치하려는 분들을 위해 작성되었으니, 여러분들께 많은 도움이 되기를 바랍니다.
 
-> **_각주_**
-> 궁금한 점 혹은 수정사항은 이슈로 남겨주세요!
+> **_각주_**<br>
+> 궁금한 점 혹은 수정사항은 이슈로 남겨주세요!<br>
 > 혹은 uhug@naver.com으로 메일주셔도 됩니다.
 
 
 #### WordPress 설치 전 확인해야 하는 것들
 
-본격적으로 워드프레스 블로그를 설치하기 전에, [워드프레스 설치 전에](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/before-you-install.md)문서를 참고하여 여러분의 서버 환경이 조건을 만족하는지 먼저 확인해주세요.
+&nbsp;본격적으로 워드프레스 블로그를 설치하기 전에, [워드프레스 설치 전에](https://github.com/DokySp/how-to-install-wordpress-kr/blob/master/appendix/before-you-install.md) 문서를 참고하여 여러분의 서버 환경이 조건을 만족하는지 먼저 확인해주세요.
 만약, 여려 개의 블로그를 하나의 서버에 제작하실 분들은 [여러 개 워드프레스 인스턴스 설치하기(Eng)](https://wordpress.org/support/article/installing-multiple-blogs/)문서를 참고하시면 됩니다.
 
 
 
 ## 간단 설치법
 
-이전에 워드프레스 블로그를 설치해본 경험이 있으신 분들을 위한 간단 설치법입니다. 워드프레스를 처음 설치해보시거나 자세한 설명을 원하시는 분들은 [상세 설치법](#상세-설치법)을 참고하시면 됩니다.
+&nbsp;이전에 워드프레스 블로그를 설치해본 경험이 있으신 분들을 위한 간단 설치법입니다. 워드프레스를 처음 설치해보시거나 자세한 설명을 원하시는 분들은 [상세 설치법](#상세-설치법)을 참고하시면 됩니다.
 
-1. [WordPress 파일 다운로드](https://wordpress.org/download/)하고 압축을 풀어줍니다.
+1. [WordPress 패키지를 다운로드](https://wordpress.org/download/)하고 압축을 풀어줍니다.
 2. [`MySQL`](https://wordpress.org/support/article/glossary/#mysql) (혹은 `MariaDB`)에 데이터베이스를 생성합니다. 이 때 생성한 데이터베이스에 **모든 사용자에게 읽기 및 쓰기 권한을 주도록 설정해야 합니다.**
-3. *(Optional)* `wp-config-sample.php` 파일을 `wp-config.php`로 변경합니다. 이 후, 파일을 다음 설명에 맞추어 수정하고([wp-config.php 파일 수정하기(Eng)](https://wordpress.org/support/article/editing-wp-config-php/) 문서 참고), Step1에서 생성한 데이터베이스 정보를 파일에 입력합니다.
-참고: **유닉스, 리눅스 기반 OS에서 파일 이름을 바꾸는게 익숙치 않으신 분들은 Step3를 반드시 하지 않으셔도 됩니다.** 설치프로그램이 자동으로 wp-config.php파일을 생성하므로 Step3를 그냥 넘어가셔도 됩니다.
+3. *(선택사항)* `wp-config-sample.php` 파일을 `wp-config.php`로 변경합니다. 이 후, 파일을 다음 설명에 맞추어 수정하고([wp-config.php 파일 수정하기(Eng)](https://wordpress.org/support/article/editing-wp-config-php/) 문서 참고), Step1에서 생성한 데이터베이스 정보를 파일에 입력합니다.
+> 참고: **유닉스, 리눅스 기반 OS에서 파일 이름을 바꾸는게 익숙치 않으신 분들은 Step3를 반드시 하지 않으셔도 됩니다.** 설치프로그램이 자동으로 wp-config.php파일을 생성하므로 Step3를 그냥 넘어가셔도 됩니다.
 4. WordPress파일을 서버에 원하는 위치에 옮기도록 합니다.
    - 만약 루트 도메인에 워드프레스를 연결시킬 경우(ex> `https://www.example.com/`), 모든 파일을 압축 해제 후 안의 내용물을 전부 서버의 루트 디렉토리(ex>Apache의 경우, `/var/www/html`)에 넣기.
    - 만약 서브디렉토리에 넣을 경우(ex> `https://www.example.com/blog`), 서버의 루트 디렉토리에 blog 폴더를 생성하고, 모든 파일을 압축 해제 후 안의 내용물을 전부 blog 폴더에 넣기.
@@ -47,18 +45,17 @@
    - 워드프레스를 서버의 루트 디렉토리에 설치한 경우, `https://example.com`로 접속!
    - 워드프레스를 서버의 서브 디렉토리(ex> `blog`)에 설치한 경우, `https://example.com/blog`로 접속!
 
-이게 전부입니다. 이제 설치한 블로그 URL로 접속하시면 워드프레스가 설치되어 있는 모습을 보실 수 있을 겁니다.
+워드프레스 설치가 끝났습니다! 이제 설치한 블로그의 URL로 접속하시면 워드프레스 블로그가 잘 돌아가고 있는 모습을 보실 수 있습니다.
 
 
 ## 상세 설치법
 
 ### Step 1: 워드프레스 다운로드 및 압축 풀기
 
-먼저 WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로드 받은 후, 압축을 풀어줍니다.
-
+&nbsp;먼저 WordPress패키지를 [여기](https://wordpress.org/download/)에서 다운로드 받은 후, 압축을 풀어줍니다.
 - 워드프레스를 원격 웹서버에 업로드할 경우엔, 서버 말고 평소 작업할 때 사용하는 컴퓨터에 워드프레스 패키지를 받은 후에 압축을 푸셔야 합니다.
-- FTP를 사용한다면, Step 2로 건너뛰시면 됩니다. (파일 업로드는 뒤에 스텝에서 진행 예정)
-- 만약 CLI환경에 익숙하시고 쉘을 통해 웹서버에 바로 엑세스할 수 있는 경우*(ex> ssh등)* + 모종의 이유로 [FTP](https://wordpress.org/support/article/glossary/#ftp)를 사용하지 않으시는 분들은 `wget`(혹은 `lynx` 또는 콘솔환경을 지원하는 웹브라우저)을 사용해서 파일을 다운로드하셔도 됩니다.
+- FTP를 사용한다면, Step 2로 건너뛰시면 됩니다. (파일 업로드는 Step 4 에서 진행 예정)
+- 만약 CLI환경에 익숙하시고 쉘을 통해 웹서버에 바로 엑세스할 수 있는 경우 *(ex> ssh등)* + 모종의 이유로 [FTP](https://wordpress.org/support/article/glossary/#ftp)를 사용하지 않으시는 분들은 `wget`(혹은 `lynx` 또는 콘솔환경을 지원하는 웹브라우저)을 사용해서 파일을 다운로드하셔도 됩니다.
   - `wget https://wordpress.org/latest.tar.gz/`
   - 파일을 다운로드한 후, 다음 명령으로 압축을 푸세요.
     `tar -xzvf latest.tar.gz`
